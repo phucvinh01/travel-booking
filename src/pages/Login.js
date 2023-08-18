@@ -1,12 +1,39 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
+import { toast } from 'react-toastify';
+import { authLogin } from '../service/AuthService'
+import { UserContext } from '../context/UserContext'
 function Login() {
+    const { login } = useContext(UserContext);
     const navigate = useNavigate();
     const handleGoBack = () => {
         navigate(-1)
     };
+    // State
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleLogin = async () => {
+        if (!email || !password) {
+            toast.dismiss("Missing information..")
+        }
+        else {
+            let res = await authLogin(email, password)
+            if (res && res.token) {
+                localStorage.setItem('token', res.token)
+                login(email, res.token)
+                navigate("/")
+            }
+            else {
+                if (res.status === 400) {
+                    toast.error("Email or password not match")
+                }
+            }
+        }
+    }
+
     return (
         <>
             <div className="vh-75 my-5">
@@ -26,7 +53,9 @@ function Login() {
                                         label="Email address"
                                         className="mb-3"
                                     >
-                                        <Form.Control type="email" placeholder="name@example.com" />
+                                        <Form.Control type="email" placeholder="name@example.com"
+                                            onChange={ (e) => setEmail(e.target.value) }
+                                        />
                                     </FloatingLabel>
 
                                 </div>
@@ -34,7 +63,8 @@ function Login() {
 
                                 <div className="form-outline mb-3">
                                     <FloatingLabel controlId="floatingPassword" label="Password">
-                                        <Form.Control type="password" placeholder="Password" />
+                                        <Form.Control type="password" placeholder="Password"
+                                            onChange={ (e) => setPassword(e.target.value) } />
                                     </FloatingLabel>
                                 </div>
 
@@ -51,6 +81,7 @@ function Login() {
 
                                 <div className="text-center text-lg-start mt-4 pt-2">
                                     <button type="button" className="btn btn-login d-block w-100"
+                                        onClick={ handleLogin }
                                     >Login</button>
                                     <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <Link to={ '/register' }
                                         className="link-danger">Register</Link></p>

@@ -1,8 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { useState } from 'react';
-import { NavLink, Link, useNavigate, useLocation } from "react-router-dom"
+import { NavLink, Link, useLocation } from "react-router-dom"
 import Offcanvas from './Offcanvas'
+import { UserContext } from '../context/UserContext'
+import DropdownMenu from './DropdownMenu'
 const Header = () => {
+    const { user, logout } = useContext(UserContext)
+
+
     const location = useLocation()
     const [hide, setHide] = useState(false)
     useEffect(() => {
@@ -15,6 +20,7 @@ const Header = () => {
     })
 
     return (
+
         <>
             {
                 !hide && <header className='sticky-sm-top sticky-top header px-3'>
@@ -45,8 +51,9 @@ const Header = () => {
                                     </nav>
                                 </div>
                                 <div className='col-lg-2 text-end'>
-                                    {/* <> <span> Wellcome { user.name }</span> <Link to={ "/" } onClick={ handleLogout } className='header-btn__logout'>Log out</Link> </> : */ }
-                                    <Link className=" btn-login btn" to={ '/login' }>Login</Link>
+                                    {
+                                        user.auth ? <span className='d-flex justify-content-center'>Wellcome <DropdownMenu name={ user.name } /> </span> : <Link className=" btn-login btn" to={ '/login' }>Login</Link>
+                                    }
                                 </div>
                                 <Offcanvas />
                             </div>

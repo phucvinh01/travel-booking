@@ -35,6 +35,19 @@ a{
   color: black;
 }
 
+.btn-pri {
+  border: 1px solid var(--primary-color);
+  background-color: var(--primary-color);
+  color: white ;
+  font-weight: 400 ;
+}
+.btn-li {
+  border: 1px solid #FFF;
+  background-color: var(--text-color);
+  color:var(--primary-color);
+  font-weight: 400 ;
+}
+
 /* Header */
 .btn-menu{
     display: none ;
