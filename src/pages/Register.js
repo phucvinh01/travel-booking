@@ -1,12 +1,43 @@
-import React from 'react'
+import React, { useState } from 'react'
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { useNavigate } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
+import { toast } from 'react-toastify';
+import { authRegister } from '../service/AuthService';
 const Register = () => {
     const navigate = useNavigate();
     const handleGoBack = () => {
         navigate(-1)
     };
+
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [repeat, setRepeat] = useState("")
+
+    const handleRegister = async () => {
+        if (!name || !email || !password || !repeat) {
+            toast.dismiss("Missing information....")
+        }
+        else if (password != repeat) {
+            toast.error("Password not match.....")
+        }
+        else {
+            let res = await authRegister(email, password)
+            if (res && res.id) {
+                setTimeout(() => {
+                    toast.success("Register successful..")
+                }, 2000)
+                navigate('/login')
+            }
+            else {
+                if (res.status === 400) {
+                    toast.error("Register unsuccessful..")
+                }
+            }
+        }
+    }
+
     return (
         <>
             <section className="vh-100" >
@@ -36,7 +67,7 @@ const Register = () => {
                                                             label="Your Name"
                                                             className="mb-3"
                                                         >
-                                                            <Form.Control type="text" placeholder="name@example.com" />
+                                                            <Form.Control type="text" placeholder="name@example.com" onChange={ (e) => setName(e.target.value) } />
                                                         </FloatingLabel>
                                                     </div>
                                                 </div>
@@ -49,7 +80,9 @@ const Register = () => {
                                                             label="Your Email"
                                                             className="mb-3"
                                                         >
-                                                            <Form.Control type="email" placeholder="name@example.com" />
+                                                            <Form.Control type="email" placeholder="name@example.com"
+                                                                onChange={ (e) => setEmail(e.target.value) }
+                                                            />
                                                         </FloatingLabel>
                                                     </div>
                                                 </div>
@@ -63,7 +96,9 @@ const Register = () => {
                                                             className="mb-3"
                                                         >
                                                             <Form.Control type="password"
-                                                                placeholder="name@example.com" />
+                                                                placeholder="name@example.com"
+                                                                onChange={ (e) => setPassword(e.target.value) }
+                                                            />
                                                         </FloatingLabel>
                                                     </div>
                                                 </div>
@@ -77,13 +112,15 @@ const Register = () => {
                                                             className="mb-3"
                                                         >
                                                             <Form.Control type="password"
-                                                                placeholder="name@example.com" />
+                                                                placeholder="name@example.com"
+                                                                onChange={ (e) => setRepeat(e.target.value) }
+                                                            />
                                                         </FloatingLabel>
                                                     </div>
                                                 </div>
 
                                                 <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                                    <button type="button" className="btn btn-danger d-block py-2">Register</button>
+                                                    <button onClick={ handleRegister } type="button" className="btn btn-danger d-block py-2">Register</button>
                                                 </div>
 
                                             </form>
