@@ -1,12 +1,26 @@
-import React, { useEffect, useContext } from 'react'
-import { useState } from 'react';
+import React, { useEffect, useContext, useState } from 'react'
 import { NavLink, Link, useLocation } from "react-router-dom"
 import Offcanvas from './Offcanvas'
 import { UserContext } from '../context/UserContext'
-import DropdownMenu from './DropdownMenu'
+import { Button, Dropdown } from 'react-bootstrap';
+import ModalLogin from './ModalLogin'
+import ModalRegister from './ModalRegister'
 const Header = () => {
     const { user, logout } = useContext(UserContext)
+    const [show, setShow] = useState(false);
+    const [showRegister, setShowRegister] = useState(false);
 
+    const handleClose = () => setShow(false);
+    const handleCloseRegister = () => setShowRegister(false);
+
+    const handleShow = () => setShow(true);
+    const handleShowRegister = () => {
+        setShowRegister(true)
+        setShow(false);
+    };
+    const handleLogout = () => {
+        logout()
+    }
 
     const location = useLocation()
     const [hide, setHide] = useState(false)
@@ -23,7 +37,7 @@ const Header = () => {
 
         <>
             {
-                !hide && <header className='sticky-sm-top sticky-top header px-3'>
+                !hide && <header className='sticky-sm-top sticky-top header px-3 bg-white'>
                     <div className='container-fluid'>
                         <div className='row pt-1'>
                             <div className='d-flex align-items-center justify-content-between'>
@@ -51,14 +65,43 @@ const Header = () => {
                                     </nav>
                                 </div>
                                 <div className='col-lg-2 text-end'>
-                                    {
+                                    {/* {
                                         user.auth ? <span className='d-flex justify-content-center'>Wellcome <DropdownMenu name={ user.name } /> </span> : <Link className=" btn-login btn" to={ '/login' }>Login</Link>
-                                    }
+                                    } */}
+                                    <Dropdown>
+                                        <Dropdown.Toggle variant="ligth" id="dropdown-basic"
+                                            bsPrefix='none'
+                                            className='btn btn-pri py-2 mx-2 '>
+                                            <div><i className="fa-regular fa-circle-user "></i>{ user.auth ? <strong className='px-2'>{ user.name }</strong> : <strong className='px-2'>Tài khoản</strong> }</div>
+                                        </Dropdown.Toggle>
+                                        <Dropdown.Menu>
+                                            <Dropdown.Item href="#/action-1">
+                                                { user.auth ? <><button onClick={ handleLogout } className='btn btn-li'>
+                                                    Logout
+                                                </button>
+                                                    <button className='btn btn-pri'>
+                                                        Profile
+                                                    </button>
+                                                </> : <button className='btn btn-li' onClick={ handleShow }>
+                                                    Đăng nhập
+                                                </button> }
+                                            </Dropdown.Item>
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+
                                 </div>
                                 <Offcanvas />
                             </div>
                         </div>
                     </div>
+                    <ModalLogin
+                        show={ show }
+                        handleClose={ handleClose }
+                        handleShowRegister={ handleShowRegister }
+                    />
+                    <ModalRegister
+                        showRegister={ showRegister }
+                        handleCloseRegister={ handleCloseRegister } />
                 </header>
             }
 

@@ -1,0 +1,25 @@
+.modal-header{
+    border-bottom: none;
+    background-color: transparent;
+}
+
+.img-h-50{
+    height: 600px;
+    
+  }
+.form-check-input:checked {
+  background-color: var(--primary-color);
+  border-color:var(--primary-color);
+}
+.h-custom {
+height: calc(100% - 73px);
+}
+.form-control:focus {
+  box-shadow: none !important;
+  border: none;
+  border-color:var(--primary-color);
+  border-bottom: 1px solid var(--primary-color);
+}
+.login-logo{
+  display: none;
+}

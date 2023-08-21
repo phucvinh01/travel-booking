@@ -36,9 +36,9 @@ const Footer = () => {
                     </div>
                     <div className='col-lg-3 col-md-6 col-sm-12 px-3'><h5>Quick Links</h5>
                         <ul className='p-0 list-group'>
-                            <li className='list-group-item ps-0'><NavLink to={ "/" }>Gallery</NavLink></li>
+                            <li className='list-group-item ps-0'><NavLink to={ "/about" }>Gallery</NavLink></li>
                             <li className='list-group-item ps-0'><NavLink to={ "/about" }>Login</NavLink></li>
-                            <li className='list-group-item ps-0'><NavLink to={ "/tours" }>Register</NavLink></li>
+                            <li className='list-group-item ps-0'><NavLink to={ "/about" }>Register</NavLink></li>
                         </ul>
                     </div>
                     <div className='col-lg-3 col-md-6 col-sm-12 px-3'><h5>Contact</h5>

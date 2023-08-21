@@ -40,9 +40,6 @@ function Example() {
                             >Tours</NavLink>
                         </li>
                     </ul>
-                    <div className='mt-3'>
-                        <Link className="btn-login btn d-block" to={ "/login" }>Login</Link>
-                    </div>
                 </Offcanvas.Body>
             </Offcanvas>
         </>

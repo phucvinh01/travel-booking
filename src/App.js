@@ -3,10 +3,8 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout';
 import About from './pages/About';
-import Login from './pages/Login';
 import Home from './pages/Home';
 import Tours from './pages/Tours';
-import Register from './pages/Register';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useContext } from 'react';
@@ -28,9 +26,6 @@ function App() {
           <Route path="/" element={ <Home /> } />
           <Route path="/about" element={ <About /> } />
           <Route path="/tours" element={ <Tours /> } />
-          <Route path="/login" element={ <Login /> } />
-          <Route path="/register" element={ <Register /> } />
-
         </Route>
       </Routes>
       <ToastContainer
