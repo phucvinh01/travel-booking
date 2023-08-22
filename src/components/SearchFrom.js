@@ -47,7 +47,7 @@ export const SearchFrom = () => {
                     </Form.Group>
 
                 </div>
-                <button className='col-lg-2 col-md-2 col-sm-12 btn btn-info'><i className="fa-solid fa-magnifying-glass fs-2 text-white"></i></button>
+                <button className='col-lg-2 col-md-2 col-sm-12 btn-blue'><i className="fa-solid fa-magnifying-glass fs-2 text-white"></i></button>
             </div>
         </Form>
     )

@@ -75,7 +75,7 @@ const Header = () => {
                                             <div><i className="fa-regular fa-circle-user "></i>{ user.auth ? <strong className='px-2'>{ user.name }</strong> : <strong className='px-2'>Tài khoản</strong> }</div>
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu>
-                                            <Dropdown.Item href="#/action-1">
+                                            <Dropdown.Item >
                                                 { user.auth ? <><button onClick={ handleLogout } className='btn btn-li'>
                                                     Logout
                                                 </button>

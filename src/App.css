@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;700&display=swap');
 
 :root {
-  --primary-color:#ea880f;
-  --sencondary-color:#eeaa2b;
+  --primary-color:#53cae2;
+  --sencondary-color:#188499;
   --text-color:  #FFF;
-  --active-color: #ea880f;
+  --active-color: #4bd3ee;
 }
 * {
   font-family: 'Work Sans', sans-serif;
@@ -76,7 +76,7 @@ a{
   background-image: url(https://i.pinimg.com/564x/7f/63/f0/7f63f0fde986885e9b1c181dd85fdd15.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background-position: inherit;
   background-attachment: fixed;
 }
 .home-content{
@@ -89,6 +89,21 @@ a{
 }
 .react-datepicker__calendar-icon{
    color: #333;
+}
+.card-title{
+  max-height: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 100px;
+}
+
+.tour-banner{
+height: 600px;
+  background-image: url(https://i.pinimg.com/564x/71/2c/64/712c64becbf5929aa663975ab39f9d72.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  background-attachment: fixed;
 }
   
 
@@ -129,7 +144,7 @@ a{
   }
 
   .home-content{
-  width: 50%;
+  width: 100%;
   position: absolute;
   top: 50%;
   left: 50%;

@@ -86,8 +86,8 @@ const ModalLogin = (props) => {
                             <button type="button" className="btn btn-login d-block w-100"
                                 onClick={ handleLogin }
                             >Login</button>
-                            <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <button
-                                className="btn link-danger" onClick={ handleShowRegister }>Register</button></p>
+                            <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a
+                                className="link-danger" onClick={ handleShowRegister }>Register</a></p>
                         </div>
                         <p className='text-center py-2'><strong >Or</strong></p>
                         <Stack direction="horizontal" gap={ 3 } className='justify-content-center'>
