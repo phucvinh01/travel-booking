@@ -6,12 +6,24 @@ import { UserContext } from '../context/UserContext'
 import { useNavigate, Link } from "react-router-dom";
 import './ModalLogin.css'
 import validator from 'validator';
+import FacebookLogin from 'react-facebook-login'
+import { GoogleLogin } from '@react-oauth/google';
 const ModalLogin = (props) => {
 
     const { show, handleClose, handleShowRegister } = props
     const [errorEmail, setErrorEmail] = useState(null)
     const { login } = useContext(UserContext);
     const navigate = useNavigate();
+
+    const responseFacebook = (response) => {
+        console.log(response);
+    }
+    const responseMessage = (response) => {
+        console.log(response);
+    };
+    const errorMessage = (error) => {
+        console.log(error);
+    };
     // State
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -46,13 +58,12 @@ const ModalLogin = (props) => {
                 <Modal.Header closeButton>
                 </Modal.Header>
                 <Modal.Body>
-                    <h4 className='text-center py-3'>Join with us</h4>
+                    <h2 className='text-center py-3'>Join with us</h2>
                     <form className="login-form">
                         <img src="https://i.pinimg.com/736x/2b/03/8f/2b038f755119f785195dad7ed6862307.jpg" alt="logo" className="login-logo mb-3"></img>
 
                         <div className="form-outline mb-4">
                             <FloatingLabel
-                                controlId="floatingInput"
                                 label="Email address"
                                 className="mb-3"
                             >
@@ -65,7 +76,7 @@ const ModalLogin = (props) => {
 
 
                         <div className="form-outline mb-3">
-                            <FloatingLabel controlId="floatingPassword" label="Password">
+                            <FloatingLabel label="Password">
                                 <Form.Control minLength={ 8 } type="password" placeholder="Password"
                                     onChange={ (e) => setPassword(e.target.value.trim()) } />
                             </FloatingLabel>
@@ -75,7 +86,7 @@ const ModalLogin = (props) => {
 
                             <div className="form-check mb-0">
                                 <input className="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
-                                <label className="form-check-label" for="form2Example3">
+                                <label className="form-check-label" htmlFor="form2Example3">
                                     Remember me
                                 </label>
                             </div>
@@ -90,9 +101,15 @@ const ModalLogin = (props) => {
                                 className="link-danger" onClick={ handleShowRegister }>Register</a></p>
                         </div>
                         <p className='text-center py-2'><strong >Or</strong></p>
-                        <Stack direction="horizontal" gap={ 3 } className='justify-content-center'>
-                            <Stack direction="horizontal" gap={ 3 } className='btn'><i className="fa-brands fa-facebook fs-5"></i>Facebook</Stack>
-                            <Stack direction="horizontal" gap={ 3 } className='btn'><i className="fa-brands fa-google fs-5"></i>Google</Stack>
+                        <Stack direction="vertical" className='justify-content-center mb-5'>
+                            <FacebookLogin
+                                appId="1088597931155576"
+                                fields="name,email,picture"
+                                cssClass="btn btn-pri d-block fs-5 mb-1 w-100"
+                                callback={ responseFacebook }
+                            >
+                            </FacebookLogin>
+                            <GoogleLogin onSuccess={ responseMessage } onError={ errorMessage } />
                         </Stack>
                     </form>
                 </Modal.Body>

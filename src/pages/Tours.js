@@ -1,7 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { SearchFrom } from '../components/SearchFrom';
 import ListItem from '../components/ListItem';
+import { getData } from '../service/FakeLoctionAPI';
+
 const Tours = () => {
+
+    const [data, setData] = useState([])
+    const [isLoading, setLoading] = useState(false)
+
+    const get = async (page) => {
+        let res = await getData(page)
+        console.log(res.data);
+        if (res && res.data) {
+            setData(res.data.photos)
+            setLoading(true)
+        }
+    }
+
+    useEffect(() => {
+        get(1)
+    }, [])
+
+
+
     return (
         <div className='container-fluid'>
             {/* Banner */ }
@@ -48,9 +69,11 @@ const Tours = () => {
                 <ListItem
                     title={ 'Tour Du Lịch Lễ 2/9' }
                     subtitle={ 'Chơi Lễ Thả Ga, Không Lo Về Giá' }
+                    data={ data }
+                    isLoading={ isLoading }
                 />
 
-                <ListItem
+                {/* <ListItem
                     title={ 'Tour Nước Ngoài Cao Cấp' }
                     subtitle={ 'Trải Nghiệm Thế Giới, Khám Phá Bản Thân' }
                 />
@@ -103,7 +126,7 @@ const Tours = () => {
                 <ListItem
                     title={ 'Tour Trải Nghiệm Địa Phương' }
                     subtitle={ 'Các Điểm Check In Cực Hot' }
-                />
+                /> */}
             </section>
         </div>
     )

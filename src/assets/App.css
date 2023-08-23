@@ -48,6 +48,10 @@ a{
   font-weight: 400 ;
 }
 
+.input-group-text{
+  background-color: #FFF;
+}
+
 /* Header */
 .btn-menu{
     display: none ;
